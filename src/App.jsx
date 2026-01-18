@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Book from "./components/Book";
+import Title from "./components/Title";
+import ShowFormButton from "./components/ShowFormButton";
 
-const titleText = "Bookmarkd";
-const titleStyle = "text-6xl text-red-900 text-center m-10";
 const buttonText = "Add Book";
 const buttonStyle = "text-black bg-gray-200 p-2 m-auto cursor-pointer";
 const cardStyle = "p-20 flex flex-col justify-between gap-6 bg-gray-100 ";
@@ -40,7 +40,7 @@ function App() {
   };
   return (
     <>
-      <h1 className={titleStyle}>{titleText}</h1>
+      <Title />
       <div className={cardStyle}>
         <div className="h-96 bg-gray-300 flex flex-row gap-6 p-6">
           {books.map((book) => (
@@ -75,9 +75,11 @@ function App() {
             <button className={buttonStyle}>{buttonText}</button>
           </form>
         ) : (
-          <button className={buttonStyle} onClick={() => setShowForm(true)}>
-            {buttonText}
-          </button>
+          <ShowFormButton
+            buttonStyle={buttonStyle}
+            buttonText={buttonText}
+            setShowForm={setShowForm}
+          />
         )}
       </div>
     </>
