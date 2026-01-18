@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Book from "./components/Book";
 
 const titleText = "Bookmarkd";
 const titleStyle = "text-6xl text-red-900 text-center m-10";
@@ -30,7 +31,10 @@ function App() {
   // Add the book to the list of books and clear in inputs
   const handleAddBook = (e) => {
     e.preventDefault();
-    setBooks((prevBooks) => [...prevBooks, { ...book, id: Date.now() }]);
+    setBooks((prevBooks) => [
+      ...prevBooks,
+      { ...book, id: crypto.randomUUID() },
+    ]);
     setBook({ title: "", description: "" });
     setShowForm(false);
   };
@@ -40,17 +44,11 @@ function App() {
       <div className={cardStyle}>
         <div className="h-96 bg-gray-300 flex flex-row gap-6 p-6">
           {books.map((book) => (
-            <div
+            <Book
+              title={book.title}
+              description={book.description}
               key={book.id}
-              className="bg-gray-500 p-6 flex flex-col  gap-6 text-sm"
-            >
-              <p>
-                <strong>title:</strong> {book.title}
-              </p>
-              <p>
-                <strong>description:</strong> {book.description}
-              </p>
-            </div>
+            />
           ))}
         </div>
         {showForm ? (
